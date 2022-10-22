@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 import { VscArrowSmallRight } from "react-icons/vsc";
@@ -10,14 +10,14 @@ import TextLink from "../../components/Link/TextLink";
 
 const Login = () => {
 
-  const [token, setToken] = useState(null);
-  const [success, setSuccess] = useState(false);
-  
+  const [setToken] = useState(null);
+  const [setSuccess] = useState(false);
+
   const [loginData, setLoginData] = useState( {
     username: "",
     password: ""
   })
-  
+
   const loginAPI = async (e) => {
       e.preventDefault();
       const {data} = await axios.post("http://localhost:8080/authenticate" , loginData);
@@ -28,7 +28,7 @@ const Login = () => {
   const handleOnChange = (e) => {
       setLoginData (prevState => ({...prevState ,[e.target.name] : e.target.value}))
   }
-  
+
 
   return (
     <div>
@@ -39,16 +39,16 @@ const Login = () => {
         component="div"
         text="Login"
       />
-      <TextInput 
+      <TextInput
         id="username"
-        name="username" 
-        label="username" 
-        variant="outlined" 
-        type="text" 
+        name="username"
+        label="username"
+        variant="outlined"
+        type="text"
         onChange={handleOnChange} />
       <TextInput
         id="password"
-        name="password" 
+        name="password"
         label="password"
         variant="outlined"
         type="password"
