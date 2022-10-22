@@ -49,12 +49,14 @@
     ]
   },
   "lint-staged": {
-    "*.js": "eslint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged && pretty-quick --staged"
-    }
+    "*.{js,tsx}": [
+      "./node_modules/.bin/eslint --fix",
+      "git add"
+    ],
+    "*.{js, jsx, json, html, css}": [
+      "./node_modules/.bin/prettier --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "eslint": "^8.25.0",
