@@ -5,6 +5,7 @@
 /frontend/node/
 /.idea/
 /backend/backend.iml
+/frontend/frontend.iml
 
 
 .idea/**/workspace.xml
