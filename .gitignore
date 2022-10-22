@@ -4,6 +4,8 @@
 /node/
 /frontend/node/
 /.idea/
+/backend/backend.iml
+/frontend/frontend.iml
 
 
 .idea/**/workspace.xml
@@ -77,3 +79,6 @@ fabric.properties
 # Project exclude paths
 /frontend/node_modules/
 /frontend/target/
+
+# build
+/frontend/build/
