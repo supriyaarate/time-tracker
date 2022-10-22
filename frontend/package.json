@@ -30,6 +30,11 @@
     "lint-fix": "eslint ./ --fix",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+},
   "eslintConfig": {
     "extends": [
       "react-app",
