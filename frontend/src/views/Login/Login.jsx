@@ -9,26 +9,30 @@ import Text from "../../components/Text/Text";
 import TextLink from "../../components/Link/TextLink";
 
 const Login = () => {
-
   const [setToken] = useState(null);
   const [setSuccess] = useState(false);
 
-  const [loginData, setLoginData] = useState( {
+  const [loginData, setLoginData] = useState({
     username: "",
-    password: ""
-  })
+    password: "",
+  });
 
   const loginAPI = async (e) => {
-      e.preventDefault();
-      const {data} = await axios.post("http://localhost:8080/authenticate" , loginData);
-      setToken(data.token);
-      setSuccess(true);
-  }
+    e.preventDefault();
+    const { data } = await axios.post(
+      "http://localhost:8080/authenticate",
+      loginData
+    );
+    setToken(data.token);
+    setSuccess(true);
+  };
 
   const handleOnChange = (e) => {
-      setLoginData (prevState => ({...prevState ,[e.target.name] : e.target.value}))
-  }
-
+    setLoginData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   return (
     <div>
@@ -45,7 +49,8 @@ const Login = () => {
         label="username"
         variant="outlined"
         type="text"
-        onChange={handleOnChange} />
+        onChange={handleOnChange}
+      />
       <TextInput
         id="password"
         name="password"
