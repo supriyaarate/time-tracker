@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-
 import axios from "axios";
 import { VscArrowSmallRight } from "react-icons/vsc";
-
 import TextInput from "../../components/Input/TextInput";
 import Btn from "../../components/Button/Btn";
 import Text from "../../components/Text/Text";
 import TextLink from "../../components/Link/TextLink";
 import "./../../translations/i18n";
 import { useTranslation } from "react-i18next";
+import { API_URL } from "../../config/constants.js";
+import { SET_AUTH } from "../../redux/reducer/Auth/authActionType";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const { t } = useTranslation();
-
-  const [setToken] = useState(null);
-  const [setSuccess] = useState(false);
+  const dispatch = useDispatch();
+  const [token, setToken] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const [loginData, setLoginData] = useState({
     username: "",
@@ -22,13 +23,24 @@ const Login = () => {
   });
 
   const loginAPI = async (e) => {
-    e.preventDefault();
-    const { data } = await axios.post(
-      "http://localhost:8080/authenticate",
-      loginData
-    );
-    setToken(data.token);
-    setSuccess(true);
+    try {
+      e.preventDefault();
+      const { data } = await axios.post(`${API_URL}/authenticate`, loginData);
+      data && data.token;
+      setToken(data.token);
+      setSuccess(true);
+      localStorage.setItem("token", data.token);
+      dispatch({
+        type: SET_AUTH,
+        payload: {
+          token: data.token,
+        },
+      });
+      alert("successfully login");
+      console.log(token, success);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleOnChange = (e) => {
