@@ -41,6 +41,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.22</version>
             <optional>true</optional>
         </dependency>
         <dependency>
@@ -87,7 +88,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
-                    <mainClass>dev.marco.example.springboot.Application</mainClass>
+                    <mainClass>com.job.time.tracker.Application</mainClass>
                 </configuration>
                 <executions>
                     <execution>
