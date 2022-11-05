@@ -1,8 +1,14 @@
 import { SET_AUTH } from "./authActionType";
 
 const initialState = {
+  loginData: {
+    username: "",
+    password: "",
+    success: false,
+    token: null,
+  },
+
   loggedIn: false,
-  token: null,
 };
 
 const authReducer = (state = initialState, { type, payload }) => {
@@ -10,8 +16,13 @@ const authReducer = (state = initialState, { type, payload }) => {
     case SET_AUTH:
       return {
         ...state,
-        loggedIn: true,
+        success: true,
         token: payload.token,
+        loginData: {
+          username: "",
+          password: "",
+        },
+        loggedIn: true,
       };
     default:
       return state;
