@@ -119,7 +119,7 @@ const Signup = () => {
         </Grid>
       </Grid>
 
-      <Grid wrap="nowrap" spacing={24}>
+      <Grid>
         {/* Button */}
         <Grid item align="center">
           <Btn
