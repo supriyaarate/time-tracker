@@ -22,6 +22,19 @@ const Signup = () => {
     setValue(newValue);
   };
 
+  // Styling objects
+  // Text field styling
+  const textInputStyle = {
+    divStyle: { padding: "2px", margin: "5px" }, // this contains div styling
+    sxStyle: { width: "350px" }, // (apply sx styling to textbox)
+  };
+
+  // Button Styling
+  const btnStyle = {
+    divStyle: { padding: "20px", margin: "10px" }, // this contains div styling
+    sxStyle: { width: "70%", borderRadius: "15px", fontSize: 17 }, // (apply sx styling to button)
+  };
+
   return (
     <BasicCard>
       <Typography
@@ -45,6 +58,7 @@ const Signup = () => {
             type="text"
             // onChange={handleOnChange}
             defaultvalue={t("label_firstname")}
+            styleText={textInputStyle}
           />
         </Grid>
         <Grid item xs={6}>
@@ -57,6 +71,7 @@ const Signup = () => {
             type="text"
             // onChange={handleOnChange}
             defaultvalue={t("label_lastname")}
+            styleText={textInputStyle}
           />
         </Grid>
 
@@ -71,6 +86,7 @@ const Signup = () => {
             type="email"
             // onChange={handleOnChange}
             defaultvalue="Email@domain.com"
+            styleText={textInputStyle}
           />
         </Grid>
         <Grid item xs={6}>
@@ -81,7 +97,7 @@ const Signup = () => {
               value={value}
               onChange={handleChange}
               renderInput={(params) => (
-                <div style={{ padding: "2px", margin: "5px" }}>
+                <div style={textInputStyle.divStyle}>
                   <TextField
                     sx={{
                       width: "350px",
@@ -104,6 +120,7 @@ const Signup = () => {
             variant="outlined"
             type="password"
             // onChange={handleOnChange}
+            styleText={textInputStyle}
           />
         </Grid>
         <Grid item xs={6}>
@@ -115,6 +132,7 @@ const Signup = () => {
             variant="outlined"
             type="password"
             // onChange={handleOnChange}
+            styleText={textInputStyle}
           />
         </Grid>
       </Grid>
@@ -129,6 +147,7 @@ const Signup = () => {
             size="large"
             variant="contained"
             color="info"
+            btnStyle={btnStyle}
             // onClick={loginAPI}
           />
         </Grid>

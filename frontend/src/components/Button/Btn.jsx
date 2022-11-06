@@ -12,13 +12,9 @@ const Btn = (prop) => {
     */
 
   return (
-    <div style={{ padding: "20px", margin: "10px" }}>
+    <div style={prop.btnStyle.divStyle}>
       <Button
-        sx={{
-          width: "70%",
-          borderRadius: "15px",
-          fontSize: 17,
-        }}
+        sx={prop.btnStyle.sxStyle}
         id={prop.id}
         name={prop.name}
         variant={prop.variant}

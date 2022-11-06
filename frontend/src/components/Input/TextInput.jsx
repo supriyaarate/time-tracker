@@ -10,15 +10,9 @@ const TextInput = (prop) => {
     */
 
   return (
-    <div style={{ padding: "2px", margin: "5px" }}>
+    <div style={prop.styleText.divStyle}>
       <TextField
-        sx={
-          !prop.fullwidth
-            ? {
-                width: "350px",
-              }
-            : {}
-        }
+        sx={!prop.fullwidth ? { width: prop.styleText.sxStyle.width } : {}}
         required={prop.required}
         id={prop.id}
         name={prop.name}
