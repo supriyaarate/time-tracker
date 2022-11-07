@@ -9,17 +9,12 @@ import "./../../translations/i18n";
 import { useTranslation } from "react-i18next";
 import { API_URL } from "../../config/constants.js";
 import { SET_AUTH } from "../../redux/reducer/Auth/authActionType";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const loggedIn = useSelector((state) => state.authReducer.loggedIn);
-  const account = useSelector((state) => state.authReducer.loginData);
-  console.log(loggedIn, account);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [token, setToken] = useState(null);
-  const [success, setSuccess] = useState(false);
-
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -28,17 +23,19 @@ const Login = () => {
   const loginAPI = async (e) => {
     try {
       e.preventDefault();
-      const data = await axios.post(`${API_URL}/authenticate`, loginData);
-      setToken(data.token);
-      localStorage.setItem("token", data.token);
-      dispatch({
-        type: SET_AUTH,
-        payload: {
-          token: data.token,
-        },
-      });
-      alert("successfully login");
-      console.log(data, data.config.adapter.data);
+      const { data } = await axios.post(`${API_URL}/authenticate`, loginData);
+      if (data && data.token) {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", loginData.username);
+        dispatch({
+          type: SET_AUTH,
+          payload: {
+            token: data.token,
+            username: loginData.username,
+          },
+        });
+        navigate("/home");
+      }
     } catch (error) {
       console.log(error);
     }

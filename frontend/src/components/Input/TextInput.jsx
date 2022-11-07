@@ -1,5 +1,5 @@
 import React from "react";
-import TextField from "@mui/material/TextField";
+import { TextField } from "@mui/material";
 
 const TextInput = (prop) => {
   /*Possible Values : 
