@@ -1,6 +1,5 @@
 import React from "react";
-
-import Typography from "@mui/material/Typography";
+import { Typography } from "@mui/material";
 
 const Text = (prop) => {
   /*Possible Values :

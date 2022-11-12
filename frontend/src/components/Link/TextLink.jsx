@@ -1,6 +1,6 @@
 import React from "react";
 
-import Link from "@mui/material/Link";
+import { Link } from "@mui/material";
 
 const TextLink = (prop) => {
   /*Possible Values : 
