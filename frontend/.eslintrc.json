@@ -19,6 +19,7 @@
     ],
     "rules": {
         "react/jsx-uses-react":"error",
-        "prettier/prettier": ["error", { "endOfLine": "auto" }]
+        "prettier/prettier": ["error", { "endOfLine": "auto" }],
+        "react/prop-types": ["off"]
     }
 }
