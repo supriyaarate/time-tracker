@@ -57,7 +57,6 @@ const Signup = () => {
             variant="outlined"
             type="text"
             // onChange={handleOnChange}
-            defaultvalue={t("label_firstname")}
             styleText={textInputStyle}
           />
         </Grid>
@@ -70,7 +69,6 @@ const Signup = () => {
             variant="outlined"
             type="text"
             // onChange={handleOnChange}
-            defaultvalue={t("label_lastname")}
             styleText={textInputStyle}
           />
         </Grid>
@@ -85,7 +83,6 @@ const Signup = () => {
             variant="outlined"
             type="email"
             // onChange={handleOnChange}
-            defaultvalue="Email@domain.com"
             styleText={textInputStyle}
           />
         </Grid>

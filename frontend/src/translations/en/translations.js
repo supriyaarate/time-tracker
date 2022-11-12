@@ -12,6 +12,4 @@ export const TRANSLATIONS_EN = {
   createaccount: "Create account",
   create_your_account: "Create your account",
   already_account_login: "Already have an account?",
-  label_firstname: "Enter your first name",
-  label_lastname: "Enter your last name",
 };
