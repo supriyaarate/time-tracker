@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const username = useSelector((state) => state.auth.loginInfo.username);
-  console.log(username);
+
   return (
     <div>
       <AppBar position="static" style={{ backgroundColor: "#00687B" }}>
