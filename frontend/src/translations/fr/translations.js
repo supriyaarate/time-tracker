@@ -12,6 +12,4 @@ export const TRANSLATIONS_FR = {
   createaccount: "créer un compte",
   create_your_account: "Créez votre compte",
   already_account_login: "Vous avez déjà un compte?",
-  label_firstname: "Entrez votre prénom",
-  label_lastname: "entrez votre nom de famille",
 };

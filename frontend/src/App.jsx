@@ -1,8 +1,6 @@
 import React from "react";
-
-import Signup from "./views/Signup/Signup";
-
 import "./App.css";
+import Signup from "./views/Signup/Signup";
 
 const App = () => {
   return (
@@ -11,5 +9,5 @@ const App = () => {
     </div>
   );
 };
-1;
+
 export default App;
