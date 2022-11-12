@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 
 const Btn = (prop) => {
-  /*Possible Values : 
+  /*Possible Values :
 
     variant : contained, outlined
     color (Optional) : secondary , success, error   (Default is Blue)
@@ -12,8 +12,9 @@ const Btn = (prop) => {
     */
 
   return (
-    <>
+    <div style={prop.btnStyle.divStyle}>
       <Button
+        sx={prop.btnStyle.sxStyle}
         id={prop.id}
         name={prop.name}
         variant={prop.variant}
@@ -25,7 +26,7 @@ const Btn = (prop) => {
       >
         {prop.text}
       </Button>
-    </>
+    </div>
   );
 };
 
