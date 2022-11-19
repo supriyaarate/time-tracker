@@ -10,11 +10,9 @@ import { useTranslation } from "react-i18next";
 import { API_URL } from "../../config/constants.js";
 import { SET_AUTH } from "../../redux/reducer/Auth/authActionType";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -34,7 +32,6 @@ const Login = () => {
             username: loginData.username,
           },
         });
-        navigate("/home");
       }
     } catch (error) {
       console.log(error);

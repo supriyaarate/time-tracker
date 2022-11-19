@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+// import HomePage from "./views/HomePage/HomePage";
 import Signup from "./views/Signup/Signup";
 
 const App = () => {
