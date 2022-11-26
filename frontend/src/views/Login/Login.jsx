@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { VscArrowSmallRight } from "react-icons/vsc";
-import TextInput from "../../components/Input/TextInput";
-import Btn from "../../components/Button/Btn";
-import Text from "../../components/Text/Text";
-import TextLink from "../../components/Link/TextLink";
+// import TextInput from "../../components/Input/TextInput";
+// import Btn from "../../components/Button/Btn";
+// import Text from "../../components/Text/Text";
+// import TextLink from "../../components/Link/TextLink";
 import "./../../translations/i18n";
 import { useTranslation } from "react-i18next";
-import { API_URL } from "../../config/constants.js";
 import { SET_AUTH } from "../../redux/reducer/Auth/authActionType";
 import { useDispatch } from "react-redux";
+import { Button, TextField, Typography } from "@mui/material";
+// import Link from "@mui/material";
+import axios from "../../utils/axiosCustomize";
+
 const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -21,7 +23,7 @@ const Login = () => {
   const loginAPI = async (e) => {
     try {
       e.preventDefault();
-      const { data } = await axios.post(`${API_URL}/authenticate`, loginData);
+      const { data } = await axios.post("authenticate", loginData);
       if (data && data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", loginData.username);
@@ -30,6 +32,7 @@ const Login = () => {
           payload: {
             token: data.token,
             username: loginData.username,
+            loading: false,
           },
         });
       }
@@ -47,14 +50,14 @@ const Login = () => {
 
   return (
     <div>
-      <Text
+      <Typography
         id="login-text"
         name="login-text"
         variant="h4"
         component="div"
         text="Login"
       />
-      <TextInput
+      <TextField
         id="username"
         name="username"
         label={t("username")}
@@ -62,7 +65,7 @@ const Login = () => {
         type="text"
         onChange={handleOnChange}
       />
-      <TextInput
+      <TextField
         id="password"
         name="password"
         label={t("password")}
@@ -70,7 +73,7 @@ const Login = () => {
         type="password"
         onChange={handleOnChange}
       />
-      <Btn
+      <Button
         id="login-btn"
         name="login-btn"
         text={t("login")}
@@ -81,15 +84,11 @@ const Login = () => {
       />
 
       <div>
-        <Text text={t("donthaveaccout")} variant="caption" />
+        <Typography text={t("donthaveaccout")} variant="caption" />
       </div>
-      <div>
-        <TextLink
-          text={t("signuphere")}
-          variant="caption"
-          url="www.google.com"
-        />
-      </div>
+      {/* <div>
+        <Link text={t("signuphere")} variant="caption" url="www.google.com" />
+      </div> */}
     </div>
   );
 };

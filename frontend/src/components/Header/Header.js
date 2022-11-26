@@ -8,16 +8,12 @@ import {
   Box,
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useSelector } from "react-redux";
 import "./../../translations/i18n";
 import { useTranslation } from "react-i18next";
 import "../../translations/i18n";
 
 const Header = () => {
-  const username = useSelector((state) => state.auth.loginInfo.username);
-
   const { t } = useTranslation();
-  console.log(t);
   return (
     <div>
       <AppBar position="static" style={{ backgroundColor: "#00687B" }}>
@@ -52,7 +48,7 @@ const Header = () => {
                 {t("icon")}
               </IconButton>
               <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                {t("hello")} {username}
+                {t("hello")} {localStorage.getItem("username")}
               </Typography>
             </Box>
             <Box>
