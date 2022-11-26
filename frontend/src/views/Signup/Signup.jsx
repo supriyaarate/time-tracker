@@ -1,26 +1,64 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+// import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import "./../../translations/i18n";
 import BasicCard from "../../components/Card/BasicCard";
-import TextField from "@mui/material/TextField";
+// import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
-// import Text from "../../components/Text/Text";
 import TextInput from "../../components/Input/TextInput";
 import Btn from "../../components/Button/Btn";
+import { API_URL } from "../../config/constants.js";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Signup = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  const [value, setValue] = useState(new Date());
+  // const [dobDate, setDobDate] = useState(new Date());
+  const [signupData, setSignupData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    // dob: new Date(),
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-  const handleChange = (newValue) => {
-    setValue(newValue);
+  const signupAPI = async (e) => {
+    try {
+      e.preventDefault();
+      const { data } = await axios.post(
+        `${API_URL}/public/registration`,
+        signupData
+      );
+
+      if (data.status == "200") {
+        navigate("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const handleOnChange = (e) => {
+    setSignupData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  // const handleOnChangeDob = (newValue) => {
+  //   setSignupData((prevState) => ({
+  //     ...prevState,
+  //     dob: newValue,
+  //   }));
+  // };
 
   // Styling objects
   // Text field styling
@@ -52,11 +90,11 @@ const Signup = () => {
           <TextInput
             required
             id="firstname"
-            name="firstname"
+            name="firstName"
             label={t("firstname")}
             variant="outlined"
             type="text"
-            // onChange={handleOnChange}
+            onChange={handleOnChange}
             styleText={textInputStyle}
           />
         </Grid>
@@ -64,11 +102,11 @@ const Signup = () => {
           <TextInput
             required
             id="lastname"
-            name="lastname"
+            name="lastName"
             label={t("lastname")}
             variant="outlined"
             type="text"
-            // onChange={handleOnChange}
+            onChange={handleOnChange}
             styleText={textInputStyle}
           />
         </Grid>
@@ -82,17 +120,18 @@ const Signup = () => {
             label={t("email")}
             variant="outlined"
             type="email"
-            // onChange={handleOnChange}
+            onChange={handleOnChange}
             styleText={textInputStyle}
           />
         </Grid>
         <Grid item xs={6}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DesktopDatePicker
+              name="dob"
               label={t("dob")}
               inputFormat="MM/DD/YYYY"
-              value={value}
-              onChange={handleChange}
+              value={signupData.dob}
+              onChange={handleOnChangeDob}
               renderInput={(params) => (
                 <div style={textInputStyle.divStyle}>
                   <TextField
@@ -104,7 +143,17 @@ const Signup = () => {
                 </div>
               )}
             />
-          </LocalizationProvider>
+          </LocalizationProvider> */}
+          <TextInput
+            required
+            id="username"
+            name="username"
+            label={t("username")}
+            variant="outlined"
+            type="text"
+            onChange={handleOnChange}
+            styleText={textInputStyle}
+          />
         </Grid>
 
         {/* Third Row */}
@@ -116,7 +165,7 @@ const Signup = () => {
             label={t("password")}
             variant="outlined"
             type="password"
-            // onChange={handleOnChange}
+            onChange={handleOnChange}
             styleText={textInputStyle}
           />
         </Grid>
@@ -124,11 +173,11 @@ const Signup = () => {
           <TextInput
             required
             id="confirmpassword"
-            name="confirmpassword"
+            name="confirmPassword"
             label={t("confirmpassword")}
             variant="outlined"
             type="password"
-            // onChange={handleOnChange}
+            onChange={handleOnChange}
             styleText={textInputStyle}
           />
         </Grid>
@@ -145,7 +194,7 @@ const Signup = () => {
             variant="contained"
             color="info"
             btnStyle={btnStyle}
-            // onClick={loginAPI}
+            onClick={signupAPI}
           />
         </Grid>
 
