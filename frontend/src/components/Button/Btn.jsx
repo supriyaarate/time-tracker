@@ -12,19 +12,19 @@ const Btn = (prop) => {
     */
 
   return (
-    <div style={prop.btnStyle.divStyle}>
+    <div style={prop?.btnStyle?.divStyle}>
       <Button
-        sx={prop.btnStyle.sxStyle}
-        id={prop.id}
-        name={prop.name}
-        variant={prop.variant}
-        color={prop.color}
-        size={prop.size}
-        startIcon={prop.startIcon}
-        endIcon={prop.endIcon}
-        onClick={prop.onClick}
+        sx={prop?.btnStyle?.sxStyle}
+        id={prop?.id}
+        name={prop?.name}
+        variant={prop?.variant}
+        color={prop?.color}
+        size={prop?.size}
+        startIcon={prop?.startIcon}
+        endIcon={prop?.endIcon}
+        onClick={prop?.onClick}
       >
-        {prop.text}
+        {prop?.text}
       </Button>
     </div>
   );

@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { VscArrowSmallRight } from "react-icons/vsc";
-// import TextInput from "../../components/Input/TextInput";
-// import Btn from "../../components/Button/Btn";
-// import Text from "../../components/Text/Text";
-// import TextLink from "../../components/Link/TextLink";
+import TextInput from "../../components/Input/TextInput";
+import Btn from "../../components/Button/Btn";
+import Text from "../../components/Text/Text";
+import TextLink from "../../components/Link/TextLink";
 import "./../../translations/i18n";
 import { useTranslation } from "react-i18next";
 import { SET_AUTH } from "../../redux/reducer/Auth/authActionType";
 import { useDispatch } from "react-redux";
-import { Button, TextField, Typography } from "@mui/material";
+// import { Button, TextField, Typography } from "@mui/material";
 // import Link from "@mui/material";
-import axios from "../../utils/axiosCustomize";
+
+import { axiosPost } from "../../utils/axiosService";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -23,7 +24,7 @@ const Login = () => {
   const loginAPI = async (e) => {
     try {
       e.preventDefault();
-      const { data } = await axios.post("authenticate", loginData);
+      const { data } = await axiosPost("authenticate", loginData);
       if (data && data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", loginData.username);
@@ -50,14 +51,14 @@ const Login = () => {
 
   return (
     <div>
-      <Typography
+      <Text
         id="login-text"
         name="login-text"
         variant="h4"
         component="div"
         text="Login"
       />
-      <TextField
+      <TextInput
         id="username"
         name="username"
         label={t("username")}
@@ -65,7 +66,7 @@ const Login = () => {
         type="text"
         onChange={handleOnChange}
       />
-      <TextField
+      <TextInput
         id="password"
         name="password"
         label={t("password")}
@@ -73,7 +74,7 @@ const Login = () => {
         type="password"
         onChange={handleOnChange}
       />
-      <Button
+      <Btn
         id="login-btn"
         name="login-btn"
         text={t("login")}
@@ -84,13 +85,61 @@ const Login = () => {
       />
 
       <div>
-        <Typography text={t("donthaveaccout")} variant="caption" />
+        <Text text={t("donthaveaccout")} variant="caption" />
       </div>
-      {/* <div>
-        <Link text={t("signuphere")} variant="caption" url="www.google.com" />
-      </div> */}
+      <div>
+        <TextLink
+          text={t("signuphere")}
+          variant="caption"
+          url="www.google.com"
+        />
+      </div>
     </div>
   );
 };
 
 export default Login;
+
+{
+  /* <div>
+<Typography
+  id="login-text"
+  name="login-text"
+  variant="h4"
+  component="div"
+  text="Login"
+/>
+<TextField
+  id="username"
+  name="username"
+  label={t("username")}
+  variant="outlined"
+  type="text"
+  onChange={handleOnChange}
+/>
+<TextField
+  id="password"
+  name="password"
+  label={t("password")}
+  variant="outlined"
+  type="password"
+  onChange={handleOnChange}
+/>
+<Button
+  id="login-btn"
+  name="login-btn"
+  text={t("login")}
+  size="medium"
+  endIcon={<VscArrowSmallRight />}
+  variant="outlined"
+  onClick={loginAPI}
+/>
+
+<div>
+  <Typography text={t("donthaveaccout")} variant="caption" />
+</div>
+<div>
+  <Link text={t("signuphere")} variant="caption" url="www.google.com" />
+</div>
+</div> */
+}
