@@ -10,18 +10,18 @@ const TextInput = (prop) => {
     */
 
   return (
-    <div style={prop.styleText.divStyle}>
+    <div style={prop?.styleText?.divStyle}>
       <TextField
-        sx={!prop.fullwidth ? { width: prop.styleText.sxStyle.width } : {}}
-        required={prop.required}
-        id={prop.id}
-        name={prop.name}
-        label={prop.label}
-        type={prop.type}
-        variant={prop.variant}
-        onChange={prop.onChange}
-        fullWidth={prop.fullwidth}
-        defaultValue={prop.defaultvalue}
+        sx={!prop?.fullwidth ? { width: prop?.styleText?.sxStyle?.width } : {}}
+        required={prop?.required}
+        id={prop?.id}
+        name={prop?.name}
+        label={prop?.label}
+        type={prop?.type}
+        variant={prop?.variant}
+        onChange={prop?.onChange}
+        fullWidth={prop?.fullwidth}
+        defaultValue={prop?.defaultvalue}
       />
     </div>
   );

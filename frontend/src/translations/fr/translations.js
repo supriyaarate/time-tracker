@@ -12,4 +12,11 @@ export const TRANSLATIONS_FR = {
   createaccount: "créer un compte",
   create_your_account: "Créez votre compte",
   already_account_login: "Vous avez déjà un compte?",
+  icon: "Icône",
+  hello: "Bonjour",
+  logout: "Se déconnecter",
+  current_job: "Travail actuel",
+  add_edit_jobs: "Ajouter/modifier des tâches",
+  payment_invoice: "Paiement/Facture (à venir)",
+  profile: "Profil",
 };

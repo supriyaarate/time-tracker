@@ -1,14 +1,22 @@
 import React, { useState } from "react";
-import { Grid } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Button,
+  CardContent,
+  Typography,
+  Link,
+} from "@mui/material";
 import { useTranslation } from "react-i18next";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import "./../../translations/i18n";
+//import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+//import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Box } from "@mui/system";
 import BasicCard from "../../components/Card/BasicCard";
-// import TextField from "@mui/material/TextField";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
+// import Text from "../../components/Text/Text";
 import TextInput from "../../components/Input/TextInput";
 import Btn from "../../components/Button/Btn";
 import { API_URL } from "../../config/constants.js";
@@ -37,7 +45,6 @@ const Signup = () => {
         `${API_URL}/public/registration`,
         signupData
       );
-
       if (data.status == "200") {
         navigate("/login");
       }
@@ -51,7 +58,6 @@ const Signup = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-  };
 
   // const handleOnChangeDob = (newValue) => {
   //   setSignupData((prevState) => ({
@@ -75,117 +81,123 @@ const Signup = () => {
 
   return (
     <BasicCard>
-      <Typography
-        id="signup-text"
-        name="signup-text"
-        variant="h4"
-        display="block"
-        sx={{ p: "2px", m: "25px 5px 40px 10px" }}
-      >
-        {t("create_your_account")}
-      </Typography>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        {/* First Row */}
-        <Grid item xs={6}>
-          <TextInput
-            required
-            id="firstname"
-            name="firstName"
-            label={t("firstname")}
-            variant="outlined"
-            type="text"
-            onChange={handleOnChange}
-            styleText={textInputStyle}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextInput
-            required
-            id="lastname"
-            name="lastName"
-            label={t("lastname")}
-            variant="outlined"
-            type="text"
-            onChange={handleOnChange}
-            styleText={textInputStyle}
-          />
-        </Grid>
+        <CardContent>
+          <Typography
+            sx={{ typography: { md: "h4", xs: "h5" } }}
+            mb={5}
+            mt={4}
+            textAlign="left"
+            color="#00687B"
+          >
+            {t("create_your_account")}
+          </Typography>
+          <Grid container rowSpacing={2} columnSpacing={3}>
+            {/* first name */}
+            <Grid item xs={12} sm={6}>
+              <TextInput
+                required
+                id="firstname"
+                name="firstName"
+                label={t("firstname")}
+                variant="outlined"
+                type="text"
+                onChange={handleOnChange}
+                styleText={textInputStyle}
+              />
+            </Grid>
+            {/* last name */}
+            <Grid item xs={12} sm={6}>
+              <TextInput
+                required
+                id="lastname"
+                name="lastName"
+                label={t("lastname")}
+                variant="outlined"
+                type="text"
+                onChange={handleOnChange}
+                styleText={textInputStyle}
+              />
+            </Grid>
 
-        {/* Second Row */}
-        <Grid item xs={6}>
-          <TextInput
-            required
-            id="email"
-            name="email"
-            label={t("email")}
-            variant="outlined"
-            type="email"
-            onChange={handleOnChange}
-            styleText={textInputStyle}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DesktopDatePicker
-              name="dob"
-              label={t("dob")}
-              inputFormat="MM/DD/YYYY"
-              value={signupData.dob}
-              onChange={handleOnChangeDob}
-              renderInput={(params) => (
-                <div style={textInputStyle.divStyle}>
-                  <TextField
-                    sx={{
-                      width: "350px",
-                    }}
-                    {...params}
+            {/* Second Row */}
+            <Grid item xs={12} sm={6}>
+              <TextInput
+                required
+                id="email"
+                name="email"
+                label={t("email")}
+                variant="outlined"
+                type="email"
+                onChange={handleOnChange}
+                styleText={textInputStyle}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DesktopDatePicker
+                    name="dob"
+                    label={t("dob")}
+                    inputFormat="MM/DD/YYYY"
+                    value={signupData.dob}
+                    onChange={handleOnChangeDob}
+                    renderInput={(params) => (
+                      <div style={textInputStyle.divStyle}>
+                        <TextField
+                          sx={{
+                            width: "350px",
+                          }}
+                          {...params}
+                        />
+                      </div>
+                    )}
                   />
-                </div>
-              )}
-            />
-          </LocalizationProvider> */}
-          <TextInput
-            required
-            id="username"
-            name="username"
-            label={t("username")}
-            variant="outlined"
-            type="text"
-            onChange={handleOnChange}
-            styleText={textInputStyle}
-          />
-        </Grid>
+                </LocalizationProvider> */}
+                <TextInput
+                    required
+                    id="username"
+                    name="username"
+                    label={t("username")}
+                    variant="outlined"
+                    type="text"
+                    onChange={handleOnChange}
+                    styleText={textInputStyle}
+                  />
+            </Grid>
 
-        {/* Third Row */}
-        <Grid item xs={6}>
-          <TextInput
-            required
-            id="password"
-            name="password"
-            label={t("password")}
-            variant="outlined"
-            type="password"
-            onChange={handleOnChange}
-            styleText={textInputStyle}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextInput
-            required
-            id="confirmpassword"
-            name="confirmPassword"
-            label={t("confirmpassword")}
-            variant="outlined"
-            type="password"
-            onChange={handleOnChange}
-            styleText={textInputStyle}
-          />
-        </Grid>
-      </Grid>
+            {/* Third Row */}
+            <Grid item xs={12} sm={6}>
+              <TextInput
+                required
+                id="password"
+                name="password"
+                label={t("password")}
+                variant="outlined"
+                type="password"
+                onChange={handleOnChange}
+                styleText={textInputStyle}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextInput
+                required
+                id="confirmpassword"
+                name="confirmPassword"
+                label={t("confirmpassword")}
+                variant="outlined"
+                type="password"
+                onChange={handleOnChange}
+                styleText={textInputStyle}
+              />
+            </Grid>
+          </Grid>
 
-      <Grid>
-        {/* Button */}
-        <Grid item align="center">
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: "30px",
+          }}
+        >
           <Btn
             id="signup"
             name="signup"
@@ -196,21 +208,40 @@ const Signup = () => {
             btnStyle={btnStyle}
             onClick={signupAPI}
           />
-        </Grid>
-
-        {/* Login Link */}
-        <Grid item align="center">
+          {/*<Button
+              sx={{
+                width: "80%",
+                borderRadius: "15px",
+                backgroundColor: "#00687B",
+                "&:hover": {
+                  backgroundColor: "#197788",
+                },
+              }}
+              id="signup"
+              name="signup"
+              text="create account"
+              variant="contained"
+            >
+              {t("createaccount")}
+            </Button> */}
+        </Box>
           <Typography
             id="signup-login"
             name="signup-login"
             variant="subtitle2"
             component="div"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "20px",
+            }}
           >
             {t("already_account_login")}
-            <Link href="#"> {t("login")} </Link>
+            <Link href="#" sx={{ color: "#00687B" }}>
+               {t("login")}
+            </Link>
           </Typography>
-        </Grid>
-      </Grid>
+        </CardContent>
     </BasicCard>
   );
 };

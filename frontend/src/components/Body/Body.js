@@ -6,6 +6,8 @@ import lists from "../../assest/lists.gif";
 import pencil from "../../assest/pencil.gif";
 import profile from "../../assest/profile.gif";
 import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import "../../translations/i18n";
 
 const useStyles = makeStyles({
   img: {
@@ -33,6 +35,8 @@ const useStyles = makeStyles({
 });
 
 const Body = () => {
+  const { t } = useTranslation();
+
   const [show, setShow] = useState(false);
 
   const handleOnClick = () => {
@@ -44,7 +48,13 @@ const Body = () => {
     <Box className={classes.boxContainer}>
       {show ? (
         <Box className={classes.myBox}>
-          <Grid container justifyContent="center">
+          <Grid
+            container
+            justifyContent="center"
+            //add them cho nay
+            columns={{ xs: 4, sm: 8, md: 12 }}
+            sx={{ flexGrow: 1 }}
+          >
             <Grid
               item
               xs={2}
@@ -182,7 +192,7 @@ const Body = () => {
                 <Stack alignItems="center" py={2}>
                   <img src={clock} className={classes.img2}></img>
                   <Typography align="center" className={classes.textColor}>
-                    Current job
+                    {t("current_job")}
                   </Typography>
                 </Stack>
               </Paper>
@@ -200,7 +210,7 @@ const Body = () => {
                 <Stack alignItems="center" py={2}>
                   <img src={pencil} className={classes.img2}></img>
                   <Typography align="center" className={classes.textColor}>
-                    Add/edit jobs
+                    {t("add_edit_jobs")}
                   </Typography>
                 </Stack>
               </Paper>
@@ -218,7 +228,7 @@ const Body = () => {
                 <Stack alignItems="center" py={2}>
                   <img src={lists} className={classes.img2}></img>
                   <Typography align="center" className={classes.textColor}>
-                    Payment/Invoice (comming soon)
+                    {t("payment_invoice")}
                   </Typography>
                 </Stack>
               </Paper>
@@ -236,7 +246,7 @@ const Body = () => {
                 <Stack alignItems="center" py={2}>
                   <img src={profile} className={classes.img2}></img>
                   <Typography align="center" className={classes.textColor}>
-                    Profile
+                    {t("profile")}
                   </Typography>
                 </Stack>
               </Paper>
