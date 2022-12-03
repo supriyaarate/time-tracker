@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {
   Grid,
-  TextField,
-  Button,
+  // TextField,
+  // Button,
   CardContent,
   Typography,
   Link,
@@ -13,15 +13,10 @@ import "./../../translations/i18n";
 //import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { Box } from "@mui/system";
 import BasicCard from "../../components/Card/BasicCard";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-// import Text from "../../components/Text/Text";
 import TextInput from "../../components/Input/TextInput";
 import Btn from "../../components/Button/Btn";
-import { API_URL } from "../../config/constants.js";
+import { axiosPost } from "../../utils/axiosService";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const Signup = () => {
   const { t } = useTranslation();
@@ -41,10 +36,9 @@ const Signup = () => {
   const signupAPI = async (e) => {
     try {
       e.preventDefault();
-      const { data } = await axios.post(
-        `${API_URL}/public/registration`,
-        signupData
-      );
+      console.log("API CALLED");
+      // const { data } = await axiosPost("authenticate", loginData);
+      const { data } = await axiosPost("/public/registration", signupData);
       if (data.status == "200") {
         navigate("/login");
       }
@@ -58,6 +52,7 @@ const Signup = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+  };
 
   // const handleOnChangeDob = (newValue) => {
   //   setSignupData((prevState) => ({
@@ -81,59 +76,59 @@ const Signup = () => {
 
   return (
     <BasicCard>
-        <CardContent>
-          <Typography
-            sx={{ typography: { md: "h4", xs: "h5" } }}
-            mb={5}
-            mt={4}
-            textAlign="left"
-            color="#00687B"
-          >
-            {t("create_your_account")}
-          </Typography>
-          <Grid container rowSpacing={2} columnSpacing={3}>
-            {/* first name */}
-            <Grid item xs={12} sm={6}>
-              <TextInput
-                required
-                id="firstname"
-                name="firstName"
-                label={t("firstname")}
-                variant="outlined"
-                type="text"
-                onChange={handleOnChange}
-                styleText={textInputStyle}
-              />
-            </Grid>
-            {/* last name */}
-            <Grid item xs={12} sm={6}>
-              <TextInput
-                required
-                id="lastname"
-                name="lastName"
-                label={t("lastname")}
-                variant="outlined"
-                type="text"
-                onChange={handleOnChange}
-                styleText={textInputStyle}
-              />
-            </Grid>
+      <CardContent>
+        <Typography
+          sx={{ typography: { md: "h4", xs: "h5" } }}
+          mb={5}
+          mt={4}
+          textAlign="left"
+          color="#00687B"
+        >
+          {t("create_your_account")}
+        </Typography>
+        <Grid container rowSpacing={2} columnSpacing={3}>
+          {/* first name */}
+          <Grid item xs={12} sm={6}>
+            <TextInput
+              required
+              id="firstname"
+              name="firstName"
+              label={t("firstname")}
+              variant="outlined"
+              type="text"
+              onChange={handleOnChange}
+              styleText={textInputStyle}
+            />
+          </Grid>
+          {/* last name */}
+          <Grid item xs={12} sm={6}>
+            <TextInput
+              required
+              id="lastname"
+              name="lastName"
+              label={t("lastname")}
+              variant="outlined"
+              type="text"
+              onChange={handleOnChange}
+              styleText={textInputStyle}
+            />
+          </Grid>
 
-            {/* Second Row */}
-            <Grid item xs={12} sm={6}>
-              <TextInput
-                required
-                id="email"
-                name="email"
-                label={t("email")}
-                variant="outlined"
-                type="email"
-                onChange={handleOnChange}
-                styleText={textInputStyle}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+          {/* Second Row */}
+          <Grid item xs={12} sm={6}>
+            <TextInput
+              required
+              id="email"
+              name="email"
+              label={t("email")}
+              variant="outlined"
+              type="email"
+              onChange={handleOnChange}
+              styleText={textInputStyle}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DesktopDatePicker
                     name="dob"
                     label={t("dob")}
@@ -152,44 +147,44 @@ const Signup = () => {
                     )}
                   />
                 </LocalizationProvider> */}
-                <TextInput
-                    required
-                    id="username"
-                    name="username"
-                    label={t("username")}
-                    variant="outlined"
-                    type="text"
-                    onChange={handleOnChange}
-                    styleText={textInputStyle}
-                  />
-            </Grid>
-
-            {/* Third Row */}
-            <Grid item xs={12} sm={6}>
-              <TextInput
-                required
-                id="password"
-                name="password"
-                label={t("password")}
-                variant="outlined"
-                type="password"
-                onChange={handleOnChange}
-                styleText={textInputStyle}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextInput
-                required
-                id="confirmpassword"
-                name="confirmPassword"
-                label={t("confirmpassword")}
-                variant="outlined"
-                type="password"
-                onChange={handleOnChange}
-                styleText={textInputStyle}
-              />
-            </Grid>
+            <TextInput
+              required
+              id="username"
+              name="username"
+              label={t("username")}
+              variant="outlined"
+              type="text"
+              onChange={handleOnChange}
+              styleText={textInputStyle}
+            />
           </Grid>
+
+          {/* Third Row */}
+          <Grid item xs={12} sm={6}>
+            <TextInput
+              required
+              id="password"
+              name="password"
+              label={t("password")}
+              variant="outlined"
+              type="password"
+              onChange={handleOnChange}
+              styleText={textInputStyle}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <TextInput
+              required
+              id="confirmpassword"
+              name="confirmPassword"
+              label={t("confirmpassword")}
+              variant="outlined"
+              type="password"
+              onChange={handleOnChange}
+              styleText={textInputStyle}
+            />
+          </Grid>
+        </Grid>
 
         <Box
           sx={{
@@ -225,23 +220,23 @@ const Signup = () => {
               {t("createaccount")}
             </Button> */}
         </Box>
-          <Typography
-            id="signup-login"
-            name="signup-login"
-            variant="subtitle2"
-            component="div"
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "20px",
-            }}
-          >
-            {t("already_account_login")}
-            <Link href="#" sx={{ color: "#00687B" }}>
-               {t("login")}
-            </Link>
-          </Typography>
-        </CardContent>
+        <Typography
+          id="signup-login"
+          name="signup-login"
+          variant="subtitle2"
+          component="div"
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        >
+          {t("already_account_login")}
+          <Link href="#" sx={{ color: "#00687B" }}>
+            {t("login")}
+          </Link>
+        </Typography>
+      </CardContent>
     </BasicCard>
   );
 };
