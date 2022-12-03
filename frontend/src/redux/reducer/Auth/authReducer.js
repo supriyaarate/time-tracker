@@ -9,7 +9,6 @@ const initialState = {
 };
 
 const authReducer = (state = initialState, { type, payload }) => {
-  console.log(type, payload);
   switch (type) {
     case SET_AUTH:
       return {

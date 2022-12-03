@@ -48,7 +48,13 @@ const Body = () => {
     <Box className={classes.boxContainer}>
       {show ? (
         <Box className={classes.myBox}>
-          <Grid container justifyContent="center">
+          <Grid
+            container
+            justifyContent="center"
+            //add them cho nay
+            columns={{ xs: 4, sm: 8, md: 12 }}
+            sx={{ flexGrow: 1 }}
+          >
             <Grid
               item
               xs={2}
