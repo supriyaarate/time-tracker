@@ -28,11 +28,11 @@ public class JobService {
 
         final Job job = Job.builder()
                 .jobName(jobDTO.getJobName())
-                .createdTime(new Date())
-                .modifiedTime(new Date())
-                .status(true)
-                .description(jobDTO.getDescription())
-                .jUser(jUser)
+                //.createdTime(new Date())
+                //.modifiedTime(new Date())
+                //.status(true)
+                //.description(jobDTO.getDescription())
+               // .jUser(jUser)
                 .build();
 
         jobRepository.save(job);

@@ -3,9 +3,11 @@ package com.job.time.tracker.service;
 
 import com.job.time.tracker.constants.ExceptionConstants;
 import com.job.time.tracker.constants.RoleConstants;
+import com.job.time.tracker.constants.UserStatus;
 import com.job.time.tracker.dto.UserDTO;
 import com.job.time.tracker.entity.JRole;
 import com.job.time.tracker.entity.JUser;
+import com.job.time.tracker.entity.RoleUser;
 import com.job.time.tracker.exception.BusinessException;
 import com.job.time.tracker.repository.UserRepository;
 import com.job.time.tracker.security.EncryptionUtils;
@@ -14,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -23,7 +27,7 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public JUser saveUser(UserDTO userDTO , boolean activeStatus , RoleConstants roleConstant) throws BusinessException {
+	public JUser saveUser(UserDTO userDTO ) throws BusinessException {
 		
 		ValidationUtils.validateUser(userDTO);
 		checkIfUserExists(userDTO.getUsername(), userDTO.getEmail());
@@ -34,19 +38,23 @@ public class UserService {
 		jUser.setFirstName(userDTO.getFirstName());
 		jUser.setLastName(userDTO.getLastName());
 		jUser.setEmail(userDTO.getEmail());
-		jUser.setUsername(userDTO.getUsername());
+		jUser.setUserName(userDTO.getUsername());
 		jUser.setPassword(encryptedPassword);
 		jUser.setConfirmPassword(encryptedPassword);
-		jUser.setOldPassword(encryptedPassword);
-		
-		if(activeStatus) {
-			jUser.setStatus(true);
-			jUser.setEnabled(true);
-		}
 
-		final JRole role = new JRole();
-		role.setId(roleConstant.getValue());
-		jUser.addRole(role);
+		jUser.setStatus(UserStatus.ACTIVE.getId());
+		jUser.setEnabled(true);
+
+		List<RoleUser> roleUserList = new ArrayList<>();
+
+		final RoleUser roleUser = new RoleUser();
+		roleUser.setJUser(jUser);
+
+		JRole jRole = new JRole();
+		jRole.setId(RoleConstants.CLIENT.getValue());
+		roleUser.setJRole(jRole);
+		roleUserList.add(roleUser);
+		jUser.setRoleUsers(roleUserList);
 		
 		return userRepository.save(jUser);
 		
@@ -55,7 +63,7 @@ public class UserService {
 	public boolean checkIfUserExists(String username, String email) throws BusinessException {
 		
 		if(username != null) {
-			Optional<JUser> user = userRepository.findByUsername(username);
+			Optional<JUser> user = userRepository.findByuserName(username);
 			
 			if(user.isPresent()) {
 				throw new BusinessException(ExceptionConstants.USER_WITH_USERNAME_ALREADY_EXISTS);
