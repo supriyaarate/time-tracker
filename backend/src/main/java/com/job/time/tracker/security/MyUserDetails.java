@@ -2,7 +2,7 @@ package com.job.time.tracker.security;
 
 
 import com.job.time.tracker.entity.JUser;
-import com.job.time.tracker.entity.UserRole;
+import com.job.time.tracker.entity.RoleUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,30 +25,30 @@ public class MyUserDetails implements UserDetails {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private boolean accountExpired;
-	private boolean accountLocked;
-	private boolean credentialsExpired;
-	private boolean accountEnabled;
+	private Boolean accountExpired;
+	private Boolean accountLocked;
+	private Boolean credentialsExpired;
+	private Boolean accountEnabled;
 	private List<GrantedAuthority> authorities;
 	
 		
 	public MyUserDetails(JUser user) {
 		this.id = user.getId();
-		this.username = user.getUsername();
+		this.username = user.getUserName();
 		this.password = user.getPassword();
 		this.firstName = user.getFirstName();
 		this.lastName = user.getLastName();
 		this.email = user.getEmail();
-		this.accountEnabled = user.isEnabled();
-		this.accountExpired = user.isAccountExpired();
-		this.accountLocked = user.isLockedStatus();
-		this.credentialsExpired = user.isPasswordExpired();
+		this.accountEnabled = user.getEnabled();
+		this.accountExpired = user.getAccountNonExpired();
+		this.accountLocked = user.getAccountNonLocked();
+		this.credentialsExpired = user.getCredentialsNonExpired();
 
-		List<UserRole> userRoleList = user.getUserRoles();
+		List<RoleUser> userRoleList = user.getRoleUsers();
 		List<GrantedAuthority> grantedAuthorityList = new ArrayList<GrantedAuthority>();
 		
-		for(UserRole u : userRoleList) {
-			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(u.getJRole().getRole());
+		for(RoleUser u : userRoleList) {
+			SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(u.getJRole().getRoleName());
 			
 			grantedAuthorityList.add(simpleGrantedAuthority);
 		}

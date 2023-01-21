@@ -22,7 +22,7 @@ public class MyUserService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		
-		Optional<JUser> user = userRepository.findByUsername(username);
+		Optional<JUser> user = userRepository.findByuserName(username);
 				
 		user.orElseThrow( () -> new UsernameNotFoundException("Could not find user with userName" +username));
 		

@@ -34,19 +34,21 @@ public class UserService {
 		jUser.setFirstName(userDTO.getFirstName());
 		jUser.setLastName(userDTO.getLastName());
 		jUser.setEmail(userDTO.getEmail());
-		jUser.setUsername(userDTO.getUsername());
+		jUser.setUserName(userDTO.getUsername());
 		jUser.setPassword(encryptedPassword);
 		jUser.setConfirmPassword(encryptedPassword);
-		jUser.setOldPassword(encryptedPassword);
+
 		
 		if(activeStatus) {
-			jUser.setStatus(true);
+			jUser.setStatus(1);  //Subh TODO
 			jUser.setEnabled(true);
 		}
 
-		final JRole role = new JRole();
+
+		// Subh TODO
+		/*final JRole role = new JRole();
 		role.setId(roleConstant.getValue());
-		jUser.addRole(role);
+		jUser.addRole(role);*/
 		
 		return userRepository.save(jUser);
 		
@@ -55,7 +57,7 @@ public class UserService {
 	public boolean checkIfUserExists(String username, String email) throws BusinessException {
 		
 		if(username != null) {
-			Optional<JUser> user = userRepository.findByUsername(username);
+			Optional<JUser> user = userRepository.findByuserName(username);
 			
 			if(user.isPresent()) {
 				throw new BusinessException(ExceptionConstants.USER_WITH_USERNAME_ALREADY_EXISTS);

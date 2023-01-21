@@ -1,27 +1,24 @@
 package com.job.time.tracker.entity;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
- * The persistent class for the job database table.
+ * The persistent class for the organisation database table.
  * 
  */
+@Entity
 @Getter
 @Setter
 @ToString
-@Entity
-@Builder
-@Table(name="job")
-@NamedQuery(name="Job.findAll", query="SELECT j FROM Job j")
-public class Job implements Serializable {
+@Table(name="organisation")
+@NamedQuery(name="Organisation.findAll", query="SELECT o FROM Organisation o")
+public class Organisation implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -29,17 +26,14 @@ public class Job implements Serializable {
 	@Column(unique=true, nullable=false)
 	private int id;
 
-	@Column(name="JOB_NAME", nullable=false, length=50)
-	private String jobName;
+	@Column(nullable=false, length=50)
+	private String name;
 
 	//bi-directional many-to-one association to JUser
 	@ManyToOne
 	@JoinColumn(name="USER_ID", nullable=false)
 	private JUser JUser;
 
-	//bi-directional many-to-one association to TimeTracker
-	@OneToMany(mappedBy="job")
-	private List<TimeTracker> timeTrackers;
 
 
 }
