@@ -14,7 +14,7 @@ public class RegistrationService {
 
     public boolean addUser(UserDTO userDTO) throws BusinessException {
 
-        userService.saveUser(userDTO , true, RoleConstants.CLIENT);
+        userService.saveUser(userDTO );
 
         return true;
     }

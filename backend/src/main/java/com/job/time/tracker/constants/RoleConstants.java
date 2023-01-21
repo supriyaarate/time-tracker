@@ -6,7 +6,8 @@ import java.util.Map;
 public enum RoleConstants {
 
 	ADMIN(1, "ADMIN"),
-	CLIENT(2, "CLIENT");
+	CLIENT(2,"CLIENT");
+
 
     private int value;
     private String displayValue;
