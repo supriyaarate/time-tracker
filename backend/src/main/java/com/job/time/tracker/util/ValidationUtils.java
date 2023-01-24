@@ -23,7 +23,7 @@ public class ValidationUtils {
 			throw new BusinessException(ExceptionConstants.EMAIL_CANNOT_BE_NULL);
 		}
 
-		if (userDTO.getUsername() == null) {
+		if (userDTO.getUserName() == null) {
 			throw new BusinessException(ExceptionConstants.USERNAME_CANNOT_BE_NULL);
 		}
 
@@ -40,6 +40,16 @@ public class ValidationUtils {
 			log.info("password : " +userDTO.getPassword());
 			log.info("confirm pass : " +userDTO.getConfirmPassword());
 			throw  new BusinessException("Passwords do not match");
+		}
+
+		if (userDTO.getLangPref() == null) {
+			throw new BusinessException(ExceptionConstants.LANGPREF_CANNOT_BE_NULL);
+		}
+		if (userDTO.getType() <= 0 || userDTO.getType() >3) {
+			throw new BusinessException(ExceptionConstants.TYPE_CANNOT_BE_NULL_AND_CAN_BE_1_2_OR_3);
+		}
+		if (userDTO.getWalkthroughStatus() > 1 || userDTO.getWalkthroughStatus() < 0) {
+			throw new BusinessException(ExceptionConstants.WALKTHROUGH_STATUS_CAN_BE_ZERO_OR_ONE);
 		}
 
 		return true;

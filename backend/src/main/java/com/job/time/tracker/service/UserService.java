@@ -16,9 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static com.job.time.tracker.util.RandomCharUtils.generateRandomBase64Token;
 
 @Slf4j
 @Service
@@ -27,23 +32,42 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public JUser saveUser(UserDTO userDTO ) throws BusinessException {
+	public JUser saveUser(UserDTO userDTO ) throws BusinessException, UnknownHostException {
 		
 		ValidationUtils.validateUser(userDTO);
-		checkIfUserExists(userDTO.getUsername(), userDTO.getEmail());
+		checkIfUserExists(userDTO.getUserName(), userDTO.getEmail());
 		
 		String encryptedPassword = EncryptionUtils.setEncrptPassword(userDTO.getPassword());
-		
+
 		final JUser jUser = new JUser();
+		//jUser.setReferenceId("EMP"+String.valueOf(RandomConstants.generateRandomDigits()));
+		jUser.setReferenceId(generateRandomBase64Token());
 		jUser.setFirstName(userDTO.getFirstName());
+		jUser.setMiddleName(userDTO.getMiddleName());
 		jUser.setLastName(userDTO.getLastName());
-		jUser.setEmail(userDTO.getEmail());
-		jUser.setUserName(userDTO.getUsername());
+		jUser.setUserName(userDTO.getUserName());
 		jUser.setPassword(encryptedPassword);
 		jUser.setConfirmPassword(encryptedPassword);
 
+		jUser.setAddress(userDTO.getAddress());
+		jUser.setLangPref(userDTO.getLangPref());
+		jUser.setEmail(userDTO.getEmail());
+		jUser.setPhone(userDTO.getPhone());
+		jUser.setPhoneCountryCode(userDTO.getPhoneCountryCode());
+		jUser.setType(userDTO.getType());
+		jUser.setCanSendEmail(userDTO.getCanSendEmail());
+		jUser.setWalkthroughStatus(userDTO.getWalkthroughStatus());
+		jUser.setVerified(userDTO.getVerified());
+		jUser.setCreateDate(new Date());
+		jUser.setUpdateDate(new Date());
+		jUser.setIpAddress(String.valueOf(InetAddress.getLocalHost().getHostAddress()));
+
 		jUser.setStatus(UserStatus.ACTIVE.getId());
 		jUser.setEnabled(true);
+		jUser.setAccountNonExpired(true);
+		jUser.setCredentialsNonExpired(true);
+		jUser.setAccountNonLocked(true);
+
 
 		List<RoleUser> roleUserList = new ArrayList<>();
 
