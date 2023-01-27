@@ -64,9 +64,9 @@ public class UserService {
 
 		jUser.setStatus(UserStatus.ACTIVE.getId());
 		jUser.setEnabled(true);
-		jUser.setAccountNonExpired(true);
-		jUser.setCredentialsNonExpired(true);
-		jUser.setAccountNonLocked(true);
+		jUser.setAccountNonExpired(false);
+		jUser.setCredentialsNonExpired(false);
+		jUser.setAccountNonLocked(false);
 
 
 		List<RoleUser> roleUserList = new ArrayList<>();
