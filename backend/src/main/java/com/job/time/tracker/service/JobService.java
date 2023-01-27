@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,8 +19,21 @@ public class JobService {
     @Autowired
     private JobRepository jobRepository;
 
-    public List<Job> findAll() {
-        return jobRepository.findAll();
+    public List<JobDTO> findAll() {
+       // return jobRepository.findAll();
+
+        List<Job> JobsList = jobRepository.findAll();
+        List<JobDTO> JobDTOList = new ArrayList<>();
+
+
+        for(Job job : JobsList) {
+            JobDTO jobDTO = JobDTO.builder()
+                    .jobName(job.getJobName())
+                    .build();
+
+            JobDTOList.add(jobDTO);
+        }
+        return JobDTOList;
     }
 
     public HttpStatus addJob(JobDTO jobDTO, UserContext loggedInUserDetails) {

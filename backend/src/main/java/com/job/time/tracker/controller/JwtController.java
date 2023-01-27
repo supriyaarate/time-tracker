@@ -39,17 +39,18 @@ public class JwtController {
 		
 		try {
 			authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(jwtRequestDTO.getUsername(), jwtRequestDTO.getPassword()));
+					new UsernamePasswordAuthenticationToken(jwtRequestDTO.getUserName(), jwtRequestDTO.getPassword()));
 
 		} catch (DisabledException e) {
 			throw new BusinessException("User is disabled");
 		} catch (BadCredentialsException e) {
 			throw new BusinessException("Credentials are Invalid");
 		} catch (Exception e) {
+			log.info(e.getMessage());
 			throw new Exception("Something went wrong", e);
 		}
 
-		MyUserDetails myUserDetails = (MyUserDetails) myUserService.loadUserByUsername(jwtRequestDTO.getUsername());
+		MyUserDetails myUserDetails = (MyUserDetails) myUserService.loadUserByUsername(jwtRequestDTO.getUserName());
 		String token = jwtUtils.generateToken(myUserDetails);
 		return ResponseEntity.ok(new JwtResponseDTO(token));
 	}

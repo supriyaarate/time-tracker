@@ -7,5 +7,5 @@ import lombok.Getter;
 @Getter
 public class JobDTO {
     private String jobName;
-    private String description;
+
 }
