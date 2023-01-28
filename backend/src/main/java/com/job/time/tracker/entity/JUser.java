@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class JUser implements Serializable {
 	@Column(nullable = false, length = 1024)
 	private String password;
 
-	private int phone;
+	private BigInteger phone;
 
 	@Column(name = "PHONE_COUNTRY_CODE")
 	private int phoneCountryCode;

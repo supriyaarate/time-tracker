@@ -13,4 +13,8 @@ public class ExceptionConstants {
 
 	public final static String NOT_AUTHORIZED = "You are not authorized to perform this action";
 
+	public final static String LANGPREF_CANNOT_BE_NULL = "Language preference cannot be empty";
+	public final static String TYPE_CANNOT_BE_NULL_AND_CAN_BE_1_2_OR_3 = "Enter valid User Type (1,2, or 3)";
+	public final static String WALKTHROUGH_STATUS_CAN_BE_ZERO_OR_ONE = "Enter valid Walk through Status (0 or 1)";
+
 }

@@ -49,7 +49,7 @@ public class ConfigService {
         final UserDTO userDTO = UserDTO.builder()
                 .firstName(userContext.getFirstName())
                 .lastName(userContext.getLastName())
-                .username(userContext.getUsername())
+                .userName(userContext.getUsername())
                 .id(userContext.getUserId())
                 .email(userContext.getEmail())
                 .build();

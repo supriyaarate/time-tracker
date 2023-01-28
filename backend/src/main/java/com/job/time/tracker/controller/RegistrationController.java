@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.UnknownHostException;
+
 @RestController
 public class RegistrationController {
 
@@ -18,7 +20,7 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @PostMapping(value = "/public/registration", name = "AddUser")
-    public ResponseDTO addUser(@RequestBody UserDTO userDTO) throws BusinessException {
+    public ResponseDTO addUser(@RequestBody UserDTO userDTO) throws BusinessException, UnknownHostException {
 
         final ResponseDTO responseDTO = UtilService.getResponseDTO();
         responseDTO.setResponse(registrationService.addUser(userDTO));

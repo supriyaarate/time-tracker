@@ -1,9 +1,6 @@
 package com.job.time.tracker.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -20,6 +17,8 @@ import java.util.List;
 @Entity
 @Builder
 @Table(name="job")
+@AllArgsConstructor
+@NoArgsConstructor
 @NamedQuery(name="Job.findAll", query="SELECT j FROM Job j")
 public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
