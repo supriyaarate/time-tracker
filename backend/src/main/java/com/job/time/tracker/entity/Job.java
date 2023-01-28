@@ -1,5 +1,6 @@
 package com.job.time.tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import java.io.Serializable;

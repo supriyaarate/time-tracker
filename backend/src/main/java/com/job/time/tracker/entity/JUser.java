@@ -1,5 +1,6 @@
 package com.job.time.tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -119,7 +121,7 @@ public class JUser implements Serializable {
 	private List<Payment> payments;
 
 	//bi-directional many-to-one association to RoleUser
-	@OneToMany(mappedBy = "JUser")
+	@OneToMany(mappedBy = "JUser",fetch = FetchType.EAGER)
 	private List<RoleUser> roleUsers;
 
 	//bi-directional many-to-one association to Subscription

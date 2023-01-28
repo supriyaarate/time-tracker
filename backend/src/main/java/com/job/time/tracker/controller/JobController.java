@@ -8,6 +8,7 @@ import com.job.time.tracker.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,12 +29,15 @@ public class JobController {
     private UserLoggedInService userLoggedInService;
 
     @GetMapping(value = "/job", name = "FindAllJob")
-    public ResponseEntity<List<Job>> getAllJob(){
-        return new ResponseEntity<List<Job>>( jobService.findAll() , HttpStatus.OK);
+    @PreAuthorize("hasRole('CLIENT')")
+    public ResponseEntity<List<JobDTO>> getAllJob(){
+        return new ResponseEntity<List<JobDTO>>( jobService.findAll() , HttpStatus.OK);
     }
 
     @PostMapping(value = "/job", name = "AddJob")
     public ResponseEntity<JobDTO> addJob(@RequestBody JobDTO jobDTO){
         return new ResponseEntity<JobDTO>( jobService.addJob(jobDTO , userLoggedInService.getLoggedInUserDetails()));
     }
+
+
 }
