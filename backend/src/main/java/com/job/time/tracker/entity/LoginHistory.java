@@ -3,8 +3,6 @@ package com.job.time.tracker.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.stereotype.Component;
-
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;

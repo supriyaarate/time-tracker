@@ -22,8 +22,6 @@ public class MyUserService implements UserDetailsService{
 	@Autowired
 	private UserRepository userRepository;
 
-
-
 	@Autowired
 	LoginHistoryRepository loginHistoryRepository;
 	
