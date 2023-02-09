@@ -1,6 +1,8 @@
 package com.job.time.tracker.security;
 
 import com.job.time.tracker.entity.JUser;
+import com.job.time.tracker.entity.LoginHistory;
+import com.job.time.tracker.repository.LoginHistoryRepository;
 import com.job.time.tracker.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,17 +10,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.Optional;
 
 @Slf4j
 @Service
-
 public class MyUserService implements UserDetailsService{
 	
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	LoginHistoryRepository loginHistoryRepository;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

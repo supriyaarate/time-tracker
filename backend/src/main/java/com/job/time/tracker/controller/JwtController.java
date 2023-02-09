@@ -6,6 +6,7 @@ import com.job.time.tracker.dto.JwtResponseDTO;
 import com.job.time.tracker.exception.BusinessException;
 import com.job.time.tracker.security.MyUserDetails;
 import com.job.time.tracker.security.MyUserService;
+import com.job.time.tracker.service.LoginService;
 import com.job.time.tracker.util.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class JwtController {
 	private MyUserService myUserService;
 
 	@Autowired
+	private LoginService loginService;
+
+	@Autowired
 	private JwtUtils jwtUtils;
 	
 	@PostMapping(value = "/authenticate", name = "Authenticate")
@@ -52,6 +56,11 @@ public class JwtController {
 
 		MyUserDetails myUserDetails = (MyUserDetails) myUserService.loadUserByUsername(jwtRequestDTO.getUserName());
 		String token = jwtUtils.generateToken(myUserDetails);
+
+		// Inserting a new row in LoginHistory table on successful login
+		loginService.login(myUserDetails);
+
+
 		return ResponseEntity.ok(new JwtResponseDTO(token));
 	}
 
